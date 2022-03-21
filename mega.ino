@@ -41,7 +41,7 @@ void loop() {
         digitalWrite(BIN2, HIGH);
         digitalWrite(BIN1, LOW);
     }
-    while (digitalRead(RL1) == HIGH && digitalRead(RL2) == HIGH && digitalRead(RL1) == HIGH && digitalRead(RL4) == HIGH && digitalRead(RL5) == HIGH) {
+    while (digitalRead(RL1) == HIGH && digitalRead(RL2) == HIGH && digitalRead(RL3) == HIGH && digitalRead(RL4) == HIGH && digitalRead(RL5) == HIGH) {
         analogWrite(PWMA, 0);  
         analogWrite(PWMB, 0);   
         digitalWrite(STBY, LOW);
