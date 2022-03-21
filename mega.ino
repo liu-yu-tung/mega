@@ -32,8 +32,8 @@ void setup() {
 
 void loop() {
     
-    if (digitalRead(RL3) == HIGH && digitalRead(RL1) == LOW && digitalRead(RL5) == LOW) {
-        analogWrite(PWMA, 0); // Right wheel
+    while (digitalRead(RL3) == HIGH && digitalRead(RL1) == LOW && digitalRead(RL5) == LOW) {
+        analogWrite(PWMA, 200); // Right wheel
         analogWrite(PWMB, 200); // Right wheel 
         digitalWrite(STBY, HIGH);
         digitalWrite(AIN1, HIGH);
