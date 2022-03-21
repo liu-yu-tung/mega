@@ -32,22 +32,13 @@ void setup() {
 
 void loop() {
     
-    while (digitalRead(RL3) == HIGH && digitalRead(RL1) == LOW && digitalRead(RL5) == LOW) {
-        analogWrite(PWMA, 100); // Right wheel
-        analogWrite(PWMB, 100); // Right wheel 
-        digitalWrite(STBY, HIGH);
-        digitalWrite(AIN1, HIGH);
-        digitalWrite(AIN2, LOW);
-        digitalWrite(BIN2, HIGH);
-        digitalWrite(BIN1, LOW);
-        if(digitalRead(RL1) == LOW || digitalRead(RL5) == LOW) {
-            digitalWrite(STBY, LOW);
-        }
-    }
-    while (digitalRead(RL1) == HIGH && digitalRead(RL2) == HIGH && digitalRead(RL3) == HIGH && digitalRead(RL4) == HIGH && digitalRead(RL5) == HIGH) {
-        analogWrite(PWMA, 0);  
-        analogWrite(PWMB, 0);   
-        digitalWrite(STBY, LOW);
-    }
+    digitalWrite(STBY, HIGH);
+    digitalWrite(AIN1, HIGH);
+    digitalWrite(BIN2, HIGH);
+    digitalWrite(AIN2, LOW);
+    digitalWrite(BIN1, LOW);
+    analogWrite(PWMA, 255); 
+    analogWrite(PWMB, 255); 
+
     
    }
