@@ -40,7 +40,7 @@ void loop() {
         digitalWrite(AIN2, LOW);
         digitalWrite(BIN2, HIGH);
         digitalWrite(BIN1, LOW);
-        if(digitalRead(RL1) == LOW || digitalRead(RL%5) == LOW) {
+        if(digitalRead(RL1) == LOW || digitalRead(RL5) == LOW) {
             digitalWrite(STBY, LOW);
         }
     }
