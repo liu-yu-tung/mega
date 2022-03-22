@@ -27,20 +27,28 @@ void setup() {
     pinMode(BIN2, OUTPUT);
     pinMode(BIN1, OUTPUT);
     pinMode(STBY, OUTPUT);     // stand by 
+    pinMode(LED_BUILTIN, OUTPUT);
     
 }
 
 void loop() {
-    
-    if (digitalRead(RL3) == HIGH && digitalRead(RL1) == LOW && digitalRead(RL5) == LOW) {
-        analogWrite(PWMA, 100); // Right wheel
-        analogWrite(PWMB, 100); // Right wheel 
+        digitalWrite(LED_BUILTIN, LOW); 
+        delay(1000);// turn the LED on (HIGH is the voltage level)
+    if (digitalRead(RL3) == HIGH && (digitalRead(RL1) == LOW && digitalRead(RL5) == LOW)) {
+        analogWrite(PWMA, 255); // Right wheel
+        analogWrite(PWMB, 255); // Right wheel 
         digitalWrite(STBY, HIGH);
         digitalWrite(AIN1, HIGH);
         digitalWrite(AIN2, LOW);
         digitalWrite(BIN2, HIGH);
         digitalWrite(BIN1, LOW);
+        if(digitalRead(RL1) == HIGH || digitalRead(RL5) == HIGH) {
+            analogWrite(PWMA, 0);
+            analogWrite(PWMB, 0);
+            digitalWrite(STBY, LOW);
+        }
     }
+
     if (digitalRead(RL1) == HIGH && digitalRead(RL2) == HIGH && digitalRead(RL3) == HIGH && digitalRead(RL4) == HIGH && digitalRead(RL5) == HIGH) {
         analogWrite(PWMA, 0);  
         analogWrite(PWMB, 0);   
