@@ -11,6 +11,8 @@ int STBY=37;
 int BIN1=38;
 int BIN2=39;
 int PWMB=40;
+void MotorWriting(double vL, double vR);
+void MotorCheck();
 void setup() {
     Serial.begin(9600);
     
@@ -32,27 +34,44 @@ void setup() {
 }
 
 void loop() {
-        digitalWrite(LED_BUILTIN, LOW); 
-        delay(1000);// turn the LED on (HIGH is the voltage level)
-    if (digitalRead(RL3) == HIGH && (digitalRead(RL1) == LOW && digitalRead(RL5) == LOW)) {
-        analogWrite(PWMA, 255); // Right wheel
-        analogWrite(PWMB, 255); // Right wheel 
-        digitalWrite(STBY, HIGH);
-        digitalWrite(AIN1, HIGH);
-        digitalWrite(AIN2, LOW);
-        digitalWrite(BIN2, HIGH);
-        digitalWrite(BIN1, LOW);
-        if(digitalRead(RL1) == HIGH || digitalRead(RL5) == HIGH) {
-            analogWrite(PWMA, 0);
-            analogWrite(PWMB, 0);
-            digitalWrite(STBY, LOW);
-        }
-    }
-
-    if (digitalRead(RL1) == HIGH && digitalRead(RL2) == HIGH && digitalRead(RL3) == HIGH && digitalRead(RL4) == HIGH && digitalRead(RL5) == HIGH) {
-        analogWrite(PWMA, 0);  
-        analogWrite(PWMB, 0);   
-        digitalWrite(STBY, LOW);
-    }
+        MotorCheck();
+        //MotorWriting(255, -255);
+        //delay(450);
+        //digitalWrite(STBY, LOW);
+        delay(2000);
     
    }
+void MotorWriting(double vL, double vR) {
+    digitalWrite(STBY, HIGH);
+    if(vR >= 0) {
+        digitalWrite(AIN1, HIGH);
+        digitalWrite(AIN2, LOW);
+        analogWrite(PWMA, vR);
+       } 
+    else {
+        digitalWrite(AIN2, HIGH);
+        digitalWrite(AIN1, LOW);
+        analogWrite(PWMA, -vR);
+    }
+    if (vL >= 0) {
+        digitalWrite(BIN2, HIGH);
+        digitalWrite(BIN1, LOW);
+        analogWrite(PWMB, vL);
+        }    
+    else {
+        digitalWrite(BIN2, LOW);
+        digitalWrite(BIN1, HIGH);
+        analogWrite(PWMB, -vL);
+    }
+}
+void MotorCheck() {
+    MotorWriting(255, 255);
+    delay(2000);
+    MotorWriting(-255, -255);
+    delay(2000);
+    MotorWriting(-255, 255);
+    delay(2000);
+    MotorWriting(255, -255);
+    delay(2000);
+    MotorWriting(0, 0);
+}
